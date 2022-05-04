@@ -13,16 +13,16 @@ public class Aula10Exe03 {
 		int intCodProd, intQtdeProd;
 		double dblPrecoUnit, dblPrecoTotal, dblTotalVenda;
 		String strProdDesc;
-		do { //laço para continuar s/n
+		do { // laço para continuar s/n
 			dblTotalVenda = 0;
 			System.out.println("Bem vindo ao sistema de frente caixa");
-			do { //laço para venda do cupom fiscal
-				// Tratando a entrada de dados do produto
+			do { // laço para venda do cupom fiscal
+					// Tratando a entrada de dados do produto
 				do {
 					System.out.println("Digite o código do produto: (0 - fim da venda)");
 					intCodProd = sc.nextInt();
 				} while (intCodProd < 0);
-				//só posso digita descrição, preço e etc se codproduto > 0
+				// só posso digita descrição, preço e etc se codproduto > 0
 				if (intCodProd > 0) {
 					sc.nextLine(); // interceptar o enter do código do produto
 					System.out.println("Digite a descrição do produto:");
@@ -39,22 +39,21 @@ public class Aula10Exe03 {
 					} while (dblPrecoUnit <= 0);
 					// calculando o preço total
 					dblPrecoTotal = intQtdeProd * dblPrecoUnit;
-					//acumulando o valor
+					// acumulando o valor
 					dblTotalVenda += dblPrecoTotal;
-					System.out.println("O valor total do item "+ strProdDesc +
-									   " foi " + dblPrecoTotal);
+					System.out.println("O valor total do item " + strProdDesc + " foi " + dblPrecoTotal);
 				}
 
 			} while (intCodProd != 0);
-			//Mostrando o total geral da venda
+			// Mostrando o total geral da venda
 			System.out.println("O valor total da venda foi " + dblTotalVenda);
-			//Tratamento para continuação
+			// Tratamento para continuação
 			do {
 				System.out.println("Deseja continuar? (1-sim,2-não)");
 				intRes = sc.nextInt();
 			} while (intRes != 1 && intRes != 2);
 			//
-		}while (intRes != 2);
+		} while (intRes != 2);
 		sc.close();
 	}
 
