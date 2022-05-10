@@ -10,19 +10,21 @@ public class Aula13Exe03 {
 		Scanner sc = new Scanner(System.in);
 		String strDados[][] = new String[10][2];
 		int intOpc;
-		// Inicializando a matriz
-		for (int i = 0; i < 10; i++)
-			strDados[i][1] = "*";
 
+		// Inicializando a matriz
+		for (int i = 0; i < 10; i++) {
+			strDados[i][1] = ""; //Nome
+			strDados[i][1] = "*"; //Controle
+		}
 		do {
 			// Monstrar menu de opções
 			montagemTela();
 			intOpc = sc.nextInt();
 
+			int intConf = 1;
 			int intDisponivel;
 			switch (intOpc) {
 			case 1:
-				System.out.println();
 				System.out.println("Cadastrar novo cliente");
 				intDisponivel = -1;
 				for (int i = 0; i < 10; i++) {
@@ -43,7 +45,6 @@ public class Aula13Exe03 {
 
 				}
 				System.out.println("Digite enter para voltar ao menu");
-				System.out.println();
 				sc.nextLine();
 				break; // break do case
 
@@ -62,8 +63,9 @@ public class Aula13Exe03 {
 				System.out.println("Digite enter para voltar ao menu");
 				sc.nextLine();
 				break;
-				
+
 			case 3: // Alterar clientes pelo ID
+
 				System.out.println("Alterar cliente pelo ID");
 				sc.nextLine();
 				System.out.print("Digite o ID do cliente a ser alterado: ");
@@ -74,11 +76,56 @@ public class Aula13Exe03 {
 				} else {
 					System.out.println("Nome não encontrado!");
 				}
-				System.out.println("Digite enter para voltar ao menu");
+				do {
+					sc.nextLine();
+					System.out.println("Deseja alterar o cliente? (1-Sim / 2-Não)");
+					intConf = sc.nextInt();
+
+					sc.nextLine();
+
+					if (strDados[intDisponivel][1].equals("")) {
+						System.out.println("Digite o novo nome: ");
+						strDados[intDisponivel][0] = sc.nextLine();
+						System.out.println("Alterado com sucesso!");
+
+					}
+
+				} while (intConf != 1);
+
+				break;
+
+			case 4: // Excluir clientes pelo ID
+
+				System.out.println("Excluir cliente pelo ID");
 				sc.nextLine();
+				System.out.print("Digite o ID do cliente a ser excluído: ");
+				intDisponivel = sc.nextInt();
+				if (intDisponivel >= 0 && intDisponivel < 10 && strDados[intDisponivel][1].equals("")) {
+					System.out.println("Nome encontrado!");
+					System.out.println("Nome: " + strDados[intDisponivel][0]);
+				} else {
+					System.out.println("Nome não encontrado!");
+				}
+				do {
+					sc.nextLine();
+					System.out.println("Deseja Excluir o cliente? (1-Sim / 2-Não)");
+					intConf = sc.nextInt();
+
+					sc.nextLine();
+
+					if (strDados[intDisponivel][1].equals("")) {
+						System.out.println("Digite o novo nome: ");
+						strDados[intDisponivel][1] = "*";
+						System.out.println("Excluído com sucesso!");
+
+					}
+
+				} while (intConf != 1);
+
 				break;
 
 			case 5: // Listagem dos clientes
+				sc.nextLine();
 				System.out.println("Lista de cadastros: ");
 				for (int i = 0; i < 10; i++) {
 					if (strDados[i][1].equals("")) {
