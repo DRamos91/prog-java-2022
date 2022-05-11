@@ -6,11 +6,32 @@ public class ExemploMamifero {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Mamiferos mamifero = new Mamiferos();
-		mamifero.Boca = "Pequena";
-		mamifero.Pele = "Branca";
-		mamifero.Olhos = "Azul";
-		mamifero.Peso = 85.5;
+		// Objeto mamífero
+		Mamiferos boi = new Mamiferos();
+		boi.Boca = "Pequena";
+		boi.Pele = "Bege";
+		boi.Olhos = "Marrom";
+		boi.Peso = 800.5;
+		// Objeto mamífero
+		Mamiferos humano = new Mamiferos();
+		humano.Boca = "Pequena";
+		humano.Pele = "Branca";
+		humano.Olhos = "Azul";
+		humano.Peso = 91.5;
+		// Objeto conjunto mamíferos
+		Mamiferos conjunto[] = new Mamiferos[10];
+		// Criando o primeiro mamifero
+		conjunto[0] = new Mamiferos();
+		conjunto[0].Pele = "Branca";
+		conjunto[0].Boca = "Grande";
+		conjunto[0].Olhos = "Negro";
+		conjunto[0].Peso = 10;
+		// Criando o segundo mamifero
+		conjunto[1] = new Mamiferos();
+		conjunto[1].Pele = "Morena";
+		conjunto[1].Boca = "Grande";
+		conjunto[1].Olhos = "Negro";
+		conjunto[1].Peso = 12;
 
 	}
 
