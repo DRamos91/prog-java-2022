@@ -1,17 +1,17 @@
 package br.com.senaisp.aula15.classes;
 
 public class ConversorTemperatura {
-	private int tempOrigem;
-	private int tempDestino;
-	private double temperatura;
+	private int TempOrigem;
+	private int TempDestino;
+	private double Temperatura;
 	public ConversorTemperatura() {
 		// TODO Auto-generated constructor stub
-		this.tempOrigem = 1;
-		this.tempDestino = 1;
-		this.temperatura = 0;
+		this.TempOrigem = 1;
+		this.TempDestino = 1;
+		this.Temperatura = 0;
 	}
 	public int getTempOrigem() {
-		return tempOrigem;
+		return TempOrigem;
 	}
 	/**
 	 * Setter do tipo de temparatura de origem
@@ -23,10 +23,10 @@ public class ConversorTemperatura {
 		if(tempOrigem!= 1 && tempOrigem!=2 && tempOrigem!=3) {
 			throw new Exception("Valor inválido!");
 		}
-		this.tempOrigem = tempOrigem;
+		this.TempOrigem = tempOrigem;
 	}
 	public int getTempDestino() {
-		return tempDestino;
+		return TempDestino;
 	}
 	/**
 	 * Setter do tipo de temparatura de destino
@@ -38,37 +38,37 @@ public class ConversorTemperatura {
 		if(tempDestino!=1 && tempDestino!=2 && tempDestino!=3) {
 			throw new Exception("Valor inválido!");
 		}
-		this.tempDestino = tempDestino;
+		this.TempDestino = tempDestino;
 	}
 	public double getTemperatura() {
-		return temperatura;
+		return Temperatura;
 	}
 	public void setTemperatura(double temperatura) {
-		this.temperatura = temperatura;
+		this.Temperatura = temperatura;
 	}
 	
 	public double getTempConvertida() {
-		double dblTempConv = this.temperatura;
-		if (tempOrigem == 1) { // testando origem celsius
-			if (tempDestino == 2 ){ // testando destino Fahrenheit
-				dblTempConv =  9*temperatura/5 + 32;
+		double dblTempConv = this.Temperatura;
+		if (TempOrigem == 1) { // testando origem celsius
+			if (TempDestino == 2 ){ // testando destino Fahrenheit
+				dblTempConv =  9*Temperatura/5 + 32;
 			}
-			else if (tempDestino == 3) { // testando destino Kelvin
-				dblTempConv =  temperatura + 273;
+			else if (TempDestino == 3) { // testando destino Kelvin
+				dblTempConv =  Temperatura + 273;
 			}
-		}else if(tempOrigem == 2) { // testando origem Fahrenheit
-			if (tempDestino == 1 ){ // testando destino Celsius
-				dblTempConv =  (temperatura - 32) * 5 / 9; 
+		}else if(TempOrigem == 2) { // testando origem Fahrenheit
+			if (TempDestino == 1 ){ // testando destino Celsius
+				dblTempConv =  (Temperatura - 32) * 5 / 9; 
 			}
-			else if (tempDestino == 3) { // testando destino Kelvin
-				dblTempConv =  (temperatura - 32) * 5 / 9 + 273;
+			else if (TempDestino == 3) { // testando destino Kelvin
+				dblTempConv =  (Temperatura - 32) * 5 / 9 + 273;
 			}
 			
 		} else { // Calculando origem Kelvin
-			if (tempOrigem == 1) { // testando destino Celsius
-				dblTempConv =  temperatura - 273;
-			} else if (tempOrigem == 2) { // testando destino Fahenheit
-				dblTempConv =  (temperatura - 273) * 9 /5 +32;
+			if (TempOrigem == 1) { // testando destino Celsius
+				dblTempConv =  Temperatura - 273;
+			} else if (TempOrigem == 2) { // testando destino Fahenheit
+				dblTempConv =  (Temperatura - 273) * 9 /5 +32;
 			}
 		}
 		return dblTempConv;
