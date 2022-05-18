@@ -10,8 +10,8 @@ package br.com.senaisp.aula17.classes;
  */
 
 public class Imposto {
-	protected Double BaseCalculo;
-	private Double Aliquota;
+	private double BaseCalculo;
+	private double Aliquota;
 
 	/**
 	 * Metodo que retorna o valor do imposto calculado para base nos campos
@@ -20,11 +20,11 @@ public class Imposto {
 	 * @return Retorna o valor do imposto calculado;
 	 */
 
-	public Double calcularImposto() {
+	public double calcularImposto() {
 		return BaseCalculo * Aliquota / 100;
 	}
 
-	public Double getBaseCalculo() {
+	public double getBaseCalculo() {
 		return BaseCalculo;
 	}
 
@@ -35,13 +35,14 @@ public class Imposto {
 	 *                    esta devera ser maior que zero
 	 * @throws Exception ocorrera uma exception para valores inválidos
 	 */
-	public void setBaseCalculo(Double baseCalculo) throws Exception {
-		if (BaseCalculo < 0)
+	public void setBaseCalculo(double baseCalculo) throws Exception {
+		if (BaseCalculo < 0) {
 			throw new Exception("Digite um valor positivo!");
+		}
 		BaseCalculo = baseCalculo;
 	}
 
-	public Double getAliquota() {
+	public double getAliquota() {
 		return Aliquota;
 	}
 
@@ -51,7 +52,7 @@ public class Imposto {
 	 * @param aliquota Devera ser informada uma aliquota maior que 0 e menor que 99
 	 * @throws Exception ocorrera uma exception para valores inválidos
 	 */
-	public void setAliquota(Double aliquota) throws Exception {
+	public void setAliquota(double aliquota) throws Exception {
 		if (Aliquota <= 0 || Aliquota >= 100)
 			throw new Exception("Digite um valor de 1 à 99!");
 		Aliquota = aliquota;
