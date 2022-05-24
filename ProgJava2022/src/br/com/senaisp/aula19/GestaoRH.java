@@ -28,7 +28,7 @@ public class GestaoRH {
 			System.out.println("5 - Lançamento na folha");
 			System.out.println("6 - Listagem da folha");
 			System.out.println("7 - Exclusão Lançamento da folha");
-			System.out.println("9 - Lançamento na folha");
+			System.out.println("9 - Fim");
 			intOpc = sc.nextInt();
 			sc.nextLine();
 
@@ -51,6 +51,9 @@ public class GestaoRH {
 			case 6:
 				listagemFolha(listaFolha);
 				break;
+			case 7:
+				exclusaoFolha(listaFolha, sc);
+				break;
 			}
 			System.out.println("Pressione enter para voltar ao menu");
 			sc.nextLine();
@@ -58,15 +61,37 @@ public class GestaoRH {
 		} while (intOpc != 9);
 	}
 
+	private static void exclusaoFolha(FolhaPagamento[] listaFolha, Scanner sc) {
+		int intIdFunc = -1;
+		do {
+			System.out.println("Digite a chapa do funcionário: ");
+			int intChapa = sc.nextInt();
+			sc.nextLine();
+			// Funcionario deve existir para lançar na folha
+			intIdFunc = (pesqLancto(listaFolha, intChapa));
+			if (intIdFunc > -1) {
+				System.out.println("Deseja mesmo excluir? (1-sim/2-não)");
+				int intResp = sc.nextInt();
+				sc.nextLine();
+				if (intResp == 1) {
+					listaFolha[intIdFunc] = null;
+				}
+				break;
+			}else {
+				System.out.println("Lançamento não encontrado!");
+			}
+		} while (true);
+	}
+
 	private static void listagemFolha(FolhaPagamento[] listaFolha) {
 		System.out.println("Listagem da folha");
 		System.out.println("# - Chapa - Salário Líquido");
-		for (int i=0; i<LIMITE_FUNCIONARIOS; i++) {
-			if(listaFolha[i]!=null) {
+		for (int i = 0; i < LIMITE_FUNCIONARIOS; i++) {
+			if (listaFolha[i] != null) {
 				System.out.println(i + " - " + listaFolha[i].getChapa() + " - " + listaFolha[i].salarioLiquido());
 			}
 		}
-		
+
 	}
 
 	private static void lancamentoFolha(FolhaPagamento[] listaFolha, Funcionario[] listaFuncionario, Scanner sc) {
@@ -105,22 +130,23 @@ public class GestaoRH {
 			}
 			try {
 				folhaPagamento.setChapa(intChapa);
-				//Colocando o salário bruto através do salário do funcionário cadastrado
+				// Colocando o salário bruto através do salário do funcionário cadastrado
 				folhaPagamento.setSalarioBruto(listaFuncionario[intIdFunc].getSalario());
-				//Criando os objetos de impostos para serem calculados
+				// Criando os objetos de impostos para serem calculados
 				ImpostoInss inss = new ImpostoInss();
 				ImpostoIrrf irrf = new ImpostoIrrf();
-				//Setando a base de calculo do inss pelo salário bruto informado
+				// Setando a base de calculo do inss pelo salário bruto informado
 				inss.setBaseCalculo(folhaPagamento.getSalarioBruto());
-				//Setando o valor do inss na folha de pagamento
+				// Setando o valor do inss na folha de pagamento
 				folhaPagamento.setValorInss(inss.calcularImposto());
-				//Setando a base de calculo do IRRF através do salário bruto na folha - o valor do inss calculado
+				// Setando a base de calculo do IRRF através do salário bruto na folha - o valor
+				// do inss calculado
 				irrf.setBaseCalculo(folhaPagamento.getSalarioBruto() - folhaPagamento.getValorInss());
-				//Informando o numero de dependentes do funcionario
+				// Informando o numero de dependentes do funcionario
 				irrf.setNrDependentes(listaFuncionario[intIdFunc].getNrDependentes());
-				//Setando o irrf calculado na folha
+				// Setando o irrf calculado na folha
 				folhaPagamento.setValorIrrf(irrf.calcularImposto());
-				//Mostrando o salário líquido
+				// Mostrando o salário líquido
 				System.out.println("Salário líquido: " + folhaPagamento.salarioLiquido());
 				break;
 			} catch (Exception e) {
@@ -148,7 +174,7 @@ public class GestaoRH {
 		if (intFun > -1) {
 			mostrarFuncionario(listaFuncionario[intFun]);
 			System.out.println("--------------------------");
-			System.out.println("Deseja excluir? (1-Sim/2-Não");
+			System.out.println("Deseja excluir? (1-Sim/2-Não)");
 			int intOpc = sc.nextInt();
 			if (intOpc == 1) {
 				listaFuncionario[intFun] = null;
