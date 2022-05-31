@@ -16,6 +16,7 @@ public class ExercicioAula03Atv01 {
 		int intValorInvertido = intUnidade * 100 + intDezena * 10 + intCentena;
 		
 		System.out.println("O valor invertido é: " + intValorInvertido);
+		sc.close();
 	}
 
 }

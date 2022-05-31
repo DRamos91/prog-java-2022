@@ -46,6 +46,7 @@ public class ExemploComandoS {
 		}
 		
 		System.out.print("O resultado sera:  " + intRes);
+		sc.close();
 	}
 
 }

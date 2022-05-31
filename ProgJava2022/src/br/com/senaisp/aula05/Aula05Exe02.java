@@ -15,6 +15,7 @@ public class Aula05Exe02 {
 		else {
 			System.out.println("Número nao é divisível por 3 e por 5");
 		}
+		sc.close();
 	}
 
 }

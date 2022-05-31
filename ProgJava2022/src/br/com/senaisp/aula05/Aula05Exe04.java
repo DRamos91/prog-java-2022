@@ -46,6 +46,7 @@ public class Aula05Exe04 {
 		}
 		
 		System.out.print("O peso no Planeta selecionado será:  " + dblRes);
+		sc.close();
 	}
 
 }

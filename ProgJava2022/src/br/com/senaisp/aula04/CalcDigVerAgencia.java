@@ -19,7 +19,7 @@ public class CalcDigVerAgencia {
 				
 		int intCodverif = 10 - intSoma % 10;
 		System.out.println("O digito verificador é : " + intCodverif);
-
+		sc.close();
 	}
 
 }

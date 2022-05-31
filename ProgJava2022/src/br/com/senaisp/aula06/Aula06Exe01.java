@@ -29,6 +29,7 @@ public class Aula06Exe01 {
 			System.out.println("A area calculada é = "+dblArea);
 			System.out.println("Deseja continuar? (1-sim/2-nao): ");
 			intResp = sc.nextInt();
+			sc.close();
 		}
 	}
 }

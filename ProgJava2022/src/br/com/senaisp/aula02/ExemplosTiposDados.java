@@ -31,7 +31,7 @@ public class ExemplosTiposDados {
 		System.out.print("Digite seu nome: ");
 		String nome=sc.nextLine();
 		System.out.println("Ola: " + nome);
-		
+		sc.close();
 	}
 
 }

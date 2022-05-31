@@ -30,7 +30,9 @@ public class Aula06Exe03 {
 		
 			System.out.println("Deseja continuar? (1-sim/2-nao): ");
 		intResp = sc.nextInt();
+		sc.close();
 		}
+		
 	}
 
 }

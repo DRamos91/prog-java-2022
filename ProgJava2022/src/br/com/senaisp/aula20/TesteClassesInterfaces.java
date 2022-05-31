@@ -1,6 +1,5 @@
 package br.com.senaisp.aula20;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 

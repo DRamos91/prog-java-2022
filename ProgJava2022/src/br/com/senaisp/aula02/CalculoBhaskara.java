@@ -27,7 +27,7 @@ public class CalculoBhaskara {
 		double dblX2 = (-intB - Math.sqrt(dblDelta))/(2*intA);
 		System.out.println("Valor de X2 = " + dblX2);
 		
-		
+		sc.close();
 	}
 
 }

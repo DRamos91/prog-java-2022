@@ -18,7 +18,7 @@ public class CalculoIrrf {
 		
 		double dblIrff = dblBase*0.275 - 869.36;
 		System.out.println("O valor do IRFF é: R$ " + dblIrff);		
-		
+		sc.close();
 	}
 
 }

@@ -22,6 +22,7 @@ public class Aula07Exe04 {
 			System.out.println("Deseja converter outra temperatura? (1-Sim / 2-Não)");
 			intResp = sc.nextInt();
 		}
+		sc.close();
 	}
 
 }

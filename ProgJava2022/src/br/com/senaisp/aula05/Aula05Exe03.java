@@ -17,7 +17,7 @@ public class Aula05Exe03 {
 		}
 		else
 			System.out.println("Emprestimo aprovado!");
-
+		sc.close();
 	}
 
 }

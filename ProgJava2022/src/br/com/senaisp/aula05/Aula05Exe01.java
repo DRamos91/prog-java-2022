@@ -15,6 +15,7 @@ public class Aula05Exe01 {
 		else {
 			System.out.println("O número digitado é impar!");
 		}
+		sc.close();
 	}
 
 }

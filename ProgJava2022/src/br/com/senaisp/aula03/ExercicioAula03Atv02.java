@@ -13,7 +13,7 @@ public class ExercicioAula03Atv02 {
 		
 		double dblTempF = (9*dblTempC/5) + 32;
 		System.out.println("A temperatura em Fahrenheit = " + dblTempF +"°F");
-		
+		sc.close();
 	}
 
 }

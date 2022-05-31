@@ -75,7 +75,7 @@ public class Application {
 			System.out.print("Digite o Id do paciente: ");
 			int intId = sc.nextInt();
 			if (intId != paciente.getId()) {
-				if (pesqFunc(intId) != -1) {
+				if (pesqPac(intId) != -1) {
 					System.out.println("Chapa já existe para um funcionário! Redigite.");
 					continue;
 				}
@@ -91,16 +91,17 @@ public class Application {
 					sc.nextLine();
 			}
 		} while (true);
-		// Nome do funcionário
+		// Nome do paciente
 		do {
-			System.out.println("Digite o nome do funcionário:");
+			System.out.println("Digite o nome do paciente:");
 			paciente.setNome(sc.nextLine());
 
 		} while (true);
 
 	}
 
-	private static int pesqFunc(int intId) {
+
+	private static int pesqPac(int intId) {
 		int intRet = -1;
 		for (int intI = 0; intI < listaClientes.size(); intI++) {
 			if (listaClientes.get(intI).getId() == intId) {

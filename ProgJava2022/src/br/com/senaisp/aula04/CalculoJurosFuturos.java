@@ -19,7 +19,7 @@ public class CalculoJurosFuturos {
 		
 		double dblFv = dblValor * (Math.pow(1 + dblTaxa / 100.00, intTempo));
 		System.out.println("O valor futuro da aplicação será: R$" + dblFv);
-		
+		sc.close();
 	}
 
 }

@@ -25,6 +25,7 @@ public class Aula12exe01 {
 			} else {
 				System.out.println("Poltrona indisponível!");
 			}
+			sc.close();
 		} while (true);
 
 	}
