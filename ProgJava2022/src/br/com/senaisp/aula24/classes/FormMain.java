@@ -59,6 +59,7 @@ public class FormMain extends JFrame {
 		mntmCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FormProduto frmPrd = new FormProduto();
+				produto.novo();
 				frmPrd.setProduto(produto);
 				frmPrd.setOperacao(1);
 				frmPrd.setVisible(true);
