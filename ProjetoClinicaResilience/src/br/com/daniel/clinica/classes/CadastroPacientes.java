@@ -22,10 +22,11 @@ public class CadastroPacientes {
 		return id;
 	}
 
-	public void setId(int id) throws Exception {
-		if(id<=0) {
-			throw new Exception("ID deve ser maior que 0!");
-		}
+	public void setId(int id) {
+			//throws Exception {
+//		if(id<=0) {
+	//		throw new Exception("ID deve ser maior que 0!");
+//		}
 		this.id = id;
 	}
 
@@ -73,7 +74,7 @@ public class CadastroPacientes {
 	public void adicionar() throws Exception {
 		int intId = pesqCliente(this.id);
 		if (intId == -1) {
-			// Criando o objeto cliente para adicionar as informaçoes
+			// Criando o objeto cliente para adicionar as informaï¿½oes
 			CadastroPacientes cli = new CadastroPacientes();
 			// Setando os dados para o novo objeto
 			cli.setId(id);
@@ -85,7 +86,7 @@ public class CadastroPacientes {
 			// Colocando o objeto na lista
 			listaClientes.add(cli);
 		} else {
-			System.out.println("Já existe esse cliente!");
+			System.out.println("Jï¿½ existe esse cliente!");
 		}
 	}
 
@@ -124,7 +125,7 @@ public class CadastroPacientes {
 			cli.setNome(nome);
 			cli.setEndereco(endereco);
 		} else {
-			System.out.println("Cliente não cadastrado!");
+			System.out.println("Cliente nï¿½o cadastrado!");
 		}
 	}
 
@@ -133,7 +134,7 @@ public class CadastroPacientes {
 		if (intId > -1) {
 			listaClientes.remove(intId);
 		} else {
-			System.out.println("Cliente não cadastrado!");
+			System.out.println("Cliente nï¿½o cadastrado!");
 		}
 	}
 
@@ -144,14 +145,14 @@ public class CadastroPacientes {
 			nome = cli.getNome();
 			endereco = cli.getEndereco();
 		} else {
-			System.out.println("Cliente não cadastrado!");
+			System.out.println("Cliente nï¿½o cadastrado!");
 		}
 	}
 
 	public void mostrarCliente() {
 		System.out.println("Codigo...: " + id);
 		System.out.println("Nome.....: " + nome);
-		System.out.println("Endereço.: " + endereco);
+		System.out.println("Endereï¿½o.: " + endereco);
 		System.out.println("Idade....: " + idade);
 		System.out.println("Telefone.: " + telefone);
 		System.out.println("Email....: " + email);
