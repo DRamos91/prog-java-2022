@@ -7,9 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JToolBar;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
 
 public class FormCadastro extends JFrame {
 
