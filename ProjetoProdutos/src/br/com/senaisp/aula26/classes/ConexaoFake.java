@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConexaoFake {
-
 	private static ConexaoFake instancia;
-	private List<Produto> listaProdutos;
-
-	// Constructor
+	private List<Produto> listaProduto;
+	//constructor
 	private ConexaoFake() {
-		listaProdutos = new ArrayList<Produto>();
+		listaProduto = new ArrayList<Produto>();
 	}
-
-	public List<Produto> getListaProdutos() {
-		return listaProdutos;
+	
+	public List<Produto> getListaProduto(){
+		return listaProduto;
 	}
-
+	
 	public static synchronized ConexaoFake getInstance() {
 		if (instancia == null) {
 			instancia = new ConexaoFake();

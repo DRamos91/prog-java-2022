@@ -3,28 +3,14 @@ package br.com.senaisp.aula26.classes;
 import java.util.List;
 
 public class Produto {
-
-	private String descricao;
 	private int codigo;
+	private String descricao;
 	private double preco;
-	private List<Produto> listaProdutos;
+	private List<Produto> listaProduto;
 
 	public Produto() {
-		super();
 		ConexaoFake fake = ConexaoFake.getInstance();
-		listaProdutos = fake.getListaProdutos();
-	}
-
-	public List<Produto> getListaProdutos() {
-		return listaProdutos;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+		listaProduto = fake.getListaProduto();
 	}
 
 	public int getCodigo() {
@@ -35,6 +21,14 @@ public class Produto {
 		this.codigo = codigo;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public double getPreco() {
 		return preco;
 	}
@@ -43,81 +37,83 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public void novo() {
-		codigo = 0;
-		descricao = "";
-		preco = 0;
+	public List<Produto> getListaProdutos() {
+		return listaProduto;
 	}
-
+	
+	public void novo() {
+		codigo=0;
+		descricao="";
+		preco=0;
+	}
+	
 	public void adicionar() {
 		int intId = pesqProduto(this.codigo);
-		if (intId == -1) {
-			// Criando o objeto produto para adicionar as informaçoes
-			Produto prod = new Produto();
-			// Setando os dados para o novo objeto
-			prod.setCodigo(codigo);
-			prod.setDescricao(descricao);
-			prod.setPreco(preco);
-			// Colocando o objeto na lista
-			listaProdutos.add(prod);
+		if (intId==-1) {
+			//Criar o objeto Produto para adicionar as informações
+			Produto pro = new Produto();
+			//Setando os dados para o novo objeto
+			pro.setCodigo(codigo);
+			pro.setDescricao(descricao);
+			pro.setPreco(preco);
+			//Colocando o objeto na lista
+			listaProduto.add(pro);
 		} else {
-			System.out.println("Já existe esse produto!");
+			System.out.println("Já existe esse Produto!");
 		}
 	}
-
+	
 	public boolean hasCodigo(int value) {
 		return pesqProduto(value) != -1;
 	}
 
-	private int pesqProduto(int codigo) {
+	private int pesqProduto(int codigo2) {
 		int intRet = -1;
-		for (int i = 0; i < listaProdutos.size(); i++) {
-			if (listaProdutos.get(i).getCodigo() == codigo) {
-				intRet = i;
+		for (int intI=0;intI<listaProduto.size();intI++) {
+			if (listaProduto.get(intI).getCodigo()==codigo2) {
+				intRet=intI;
 				break;
 			}
 		}
 		return intRet;
 	}
-
+	
 	public int getListaSize() {
-		return listaProdutos.size();
+		return listaProduto.size();
 	}
 
 	public void alterar() {
-		int intId = pesqProduto(codigo);
-		if (intId > -1) {
-			Produto prod = listaProdutos.get(intId);
+		int intId=pesqProduto(codigo);
+		if (intId>-1) {
+			Produto prod = listaProduto.get(intId);
 			prod.setDescricao(descricao);
 			prod.setPreco(preco);
 		} else {
-			System.out.println("Produto não cadastrado!");
+			System.out.println("Produto Não cadastrado!");
 		}
 	}
 
 	public void excluir() {
-		int intId = pesqProduto(codigo);
-		if (intId > -1) {
-			listaProdutos.remove(intId);
+		int intId=pesqProduto(codigo);
+		if (intId>-1) {
+			listaProduto.remove(intId);
 		} else {
-			System.out.println("Produto não cadastrado!");
+			System.out.println("Produto Não cadastrado!");
 		}
 	}
-
+	
 	public void consultar() {
-		int intId = pesqProduto(codigo);
-		if (intId > -1) {
-			Produto prod = listaProdutos.get(intId);
+		int intId=pesqProduto(codigo);
+		if (intId>-1) {
+			Produto prod = listaProduto.get(intId);
 			descricao = prod.getDescricao();
 			preco = prod.getPreco();
 		} else {
-			System.out.println("Cliente não cadastrado!");
-		}
+			System.out.println("Produto Não cadastrado!");
+		}		
 	}
-
 	public void mostrarProduto() {
-		System.out.println("Codigo........: " + codigo);
-		System.out.println("Descrição.....: " + descricao);
-		System.out.println("Valor.........: " + preco);
-	}
-}
+		System.out.println("Codigo...: " + codigo);
+		System.out.println("Descricao: " + descricao);
+		System.out.println("Preço....: " + preco);
+	}}
