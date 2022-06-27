@@ -12,17 +12,19 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class Cliente {
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+public class Cliente {
 	private String nome;
 	private int idade;
 	private String cpf;
 	private String rg;
 	private Date dtNascimento;
-
+	
 	private List<Object[]> lstClientes;
 	private DateFormat dtFmt;
-
+	
 	public Cliente() {
 		lstClientes = new ArrayList<Object[]>();
 		nome = "";
@@ -81,11 +83,13 @@ public class Cliente {
 	public List<Object[]> getLstClientes() {
 		return lstClientes;
 	}
-
+	
 	public enum TipoArquivo {
-		CSV, JSON, XML
+		CSV,
+		JSON,
+		XML
 	}
-
+	
 	public boolean importarArquivo(String strArquivo, TipoArquivo tpArq) {
 		boolean ret = false;
 		switch (tpArq) {
@@ -99,7 +103,6 @@ public class Cliente {
 			ret = lerXML(strArquivo);
 			break;
 		}
-
 		return ret;
 	}
 
@@ -109,38 +112,64 @@ public class Cliente {
 	}
 
 	private boolean lerJSON(String strArquivo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private boolean lerCSV(String strArquivo) {
+		boolean ret = false;
 		lstClientes.clear();
 		try {
 			FileInputStream fis = new FileInputStream(strArquivo);
-			InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
 			BufferedReader buf = new BufferedReader(isr);
-			// Retirando a primeira linha
+			//Retirando a primeira linha
 			String linha = buf.readLine();
-			// Lendo a partir da segunda linha
-			while ((linha = buf.readLine()) != null) {
+			//Lendo a partir da 2ª linha
+			while ( (linha=buf.readLine()) != null) {
 				List<String> itens = Arrays.asList(linha.split("\\s*,\\s*"));
 				dtNascimento = dtFmt.parse(itens.get(4));
-				Object obj[]= {
-					itens.get(0),//nome
-					Integer.parseInt(itens.get(1)),//idade
-					itens.get(2),//cpf
-					itens.get(3),//rg
-					dtNascimento//data nascimento
+				Object obj[] = { //nome,idade,cpf,rg,data_nasc,sexo,signo,
+					itens.get(0), //nome 	
+					Integer.parseInt(itens.get(1)), //idade	
+					itens.get(2),//cpf	
+					itens.get(3),//rg	
+					dtNascimento//data_nasc	
 				};
 				lstClientes.add(obj);
 			}
 			buf.close();
-
+			ret = true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return ret;	
 	}
 
+	private boolean lerCSV(String strArquivo) {
+		boolean ret = false;
+		lstClientes.clear();
+		try {
+			FileInputStream fis = new FileInputStream(strArquivo);
+			InputStreamReader isr = new InputStreamReader(fis,StandardCharsets.UTF_8);
+			BufferedReader buf = new BufferedReader(isr);
+			//Retirando a primeira linha
+			String linha = buf.readLine();
+			//Lendo a partir da 2ª linha
+			while ( (linha=buf.readLine()) != null) {
+				List<String> itens = Arrays.asList(linha.split("\\s*,\\s*"));
+				dtNascimento = dtFmt.parse(itens.get(4));
+				Object obj[] = { //nome,idade,cpf,rg,data_nasc,sexo,signo,
+					itens.get(0), //nome 	
+					Integer.parseInt(itens.get(1)), //idade	
+					itens.get(2),//cpf	
+					itens.get(3),//rg	
+					dtNascimento//data_nasc	
+				};
+				lstClientes.add(obj);
+			}
+			buf.close();
+			ret = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
 }
