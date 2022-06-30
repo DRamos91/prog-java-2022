@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 public class Produto {
-
 	private int id;
 	private String descricao;
 	private int saldo;
@@ -24,9 +23,17 @@ public class Produto {
 		novo();
 	}
 
+	public void novo() {
+		id = 0;
+		descricao = null;
+		saldo = 0;
+		preco = 0;
+		local_estoque = null;
+	}
+
 	public boolean create() {
 		boolean ret = false;
-		String sql = "insert into produtos (descricao, saldo, preco, local_estoque) values (?,?,?,?)";
+		String sql = "insert into produtos(descricao,saldo," + "preco,local_estoque) values (?,?,?,?)";
 		try {
 			conn.conectarBD();
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -43,12 +50,12 @@ public class Produto {
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			id = rs.getInt(1); // Só há uma coluna, por isso 1
-			// Log
+			// log
 			System.out.println("ID -> " + id);
 			// Se tudo ocorreu bem, chegou até aqui e está tudo certo
 			ret = true;
+			// Desconectando do banco de dados
 			conn.desconectarBD();
-
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
@@ -58,43 +65,42 @@ public class Produto {
 
 	public boolean read() {
 		boolean ret = false;
-		String sql = "select id, descricao, saldo, preco, local_estoque from produtos where id=?";
+		String sql = "select id, descricao, saldo, preco, " + "local_estoque from produtos where id=?";
 		try {
 			conn.conectarBD();
-			// Preparando a instrução
+			// preparando a instrução
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql);
-			// Setando os parâmetros
+			// Setando os parametros
 			stmt.setInt(1, id);
 			// Executando a instrução
 			ResultSet rs = stmt.executeQuery();
 			// Verificando se encontrou o dado
 			if (rs.next()) {
-				// Log
+				// log
 				System.out.println("Encontrou o registro!");
 				id = rs.getInt(1);
 				descricao = rs.getString(2);
 				saldo = rs.getInt(3);
 				preco = rs.getDouble(4);
 				local_estoque = rs.getString(5);
-				ret = true;
 
+				ret = true;
 			} else {
-				// Log
+				// log
 				System.out.println("Não encontrou o registro!");
 			}
 			conn.desconectarBD();
-
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
 		}
-
 		return ret;
 	}
 
 	public boolean update() {
 		boolean ret = false;
-		String sql = "update produtos set descricao=?, saldo=?, preco=?, local_estoque=? where id=?";
+		String sql = "update produtos set " + "descricao = ?, " + "saldo = ?," + "preco = ?, " + "local_estoque = ? "
+				+ "where id = ?";
 		try {
 			conn.conectarBD();
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql);
@@ -104,14 +110,13 @@ public class Produto {
 			stmt.setDouble(3, preco);
 			stmt.setString(4, local_estoque);
 			stmt.setInt(5, id);
-			// Executando a alteração
+			// executando a alteração
 			int rowsAff = stmt.executeUpdate();
-			// Log
+			// log
 			System.out.println("Linhas alteradas: " + rowsAff);
-			// Desconectando do banco de dados
-			ret = true;
+			// desconectando do banco de dados
 			conn.desconectarBD();
-
+			ret = true;
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
@@ -125,17 +130,16 @@ public class Produto {
 		String sql = "delete from produtos where id=?";
 		try {
 			conn.conectarBD();
-			// Preparando a instrução para executar
+			// preparando a instrução para executar
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql);
-			// Setando o parametro a ser executado
+			// setando o parametro para executar
 			stmt.setInt(1, id);
-			// Executando a instrução
+			// executando a instrução
 			int rowsAff = stmt.executeUpdate();
 			ret = true;
-			// Log
+			// log
 			System.out.println("Registros deletados: " + rowsAff);
 			conn.desconectarBD();
-
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
@@ -146,14 +150,15 @@ public class Produto {
 
 	public boolean findByDescricao(String value) {
 		boolean ret = false;
-		String sql = "select id, descricao, saldo, preco, local_estoque from produtos where descricao=?";
+		String sql = "select id, descricao, saldo, " + "       preco, local_estoque " + "from produtos "
+				+ "where descricao = ?";
 		try {
 			conn.conectarBD();
-			// Preparando a instrução
+			// preparando a instrução
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql);
-			// Setando o parametro
+			// setando o parametro
 			stmt.setString(1, value);
-			// Executando a Query
+			// executando a query
 			ResultSet rs = stmt.executeQuery();
 			// Se encontrou
 			if (rs.next()) {
@@ -165,62 +170,50 @@ public class Produto {
 				ret = true;
 			}
 			conn.desconectarBD();
-
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
 		}
-
 		return ret;
 	}
 
 	public DefaultTableModel getListaProdutos() {
 		DefaultTableModel ret = null;
-		String sql = "select id, descricao, saldo, preco, local_estoque from produtos order by id";//Poderia limitar a quantidade de registros adicionando limit na frente do ID
+		String sql = "select id, descricao, saldo, " + "preco, local_estoque, created_at " + "from produtos "
+				+ "order by id " + "limit 100"; // limitando a 100 registros
 		try {
 			conn.conectarBD();
-			//Preparando a instrução
+			// preparando a instrução
 			PreparedStatement stmt = conn.getConector().prepareStatement(sql);
-			//Executando a instrução, pois não temos parametros
-			ResultSet  rs = stmt.executeQuery();
-			//Obtendo informações dos registros que retornaram
+			// executando a instrução, pois não temos parametros
+			ResultSet rs = stmt.executeQuery();
+			// Obtendo informações dos registros que retornaram
 			ResultSetMetaData rsm = stmt.getMetaData();
-			//Montando o cabeçalho dos dados
-			String titulos [] = new String [rsm.getColumnCount()];
-			//Obtendo o nome das colunas
-			for (int i = 1; i <= rsm.getColumnCount(); i++ ) {
-				titulos [i - 1] = rsm.getColumnName(i);
+			// Montando o cabeçalho dos dados
+			String titulos[] = new String[rsm.getColumnCount()];
+			// obtendo o nome das colunas
+			for (int intI = 1; intI <= rsm.getColumnCount(); intI++) {
+				titulos[intI - 1] = rsm.getColumnName(intI);
 			}
-			//Criando o tableModel
+			// criando o tablemodel
 			ret = new DefaultTableModel(titulos, 0);
-			//Adicionando os registros ao table model
-			while(rs.next()) {
+			// Adicionando os registros ao table model
+			while (rs.next()) {
 				Object obj[] = new Object[rsm.getColumnCount()];
-				for (int i = 1; i <= rsm.getColumnCount(); i++ ) {
-					obj [i - 1] = rs.getObject(i);
+				for (int intI = 1; intI <= rsm.getColumnCount(); intI++) {
+					obj[intI - 1] = rs.getObject(intI);
 				}
 				ret.addRow(obj);
 			}
-			
 		} catch (SQLException e) {
 			haErro = true;
 			msgErro = e.getMessage();
 			System.out.println(e.getMessage());
 		}
-		
 		return ret;
-	}
-	
-	public void novo() {
-		id = 0;
-		descricao = null;
-		saldo = 0;
-		preco = 0;
-		local_estoque = null;
 	}
 
 	public int getId() {
-
 		return id;
 	}
 
@@ -274,6 +267,7 @@ public class Produto {
 
 	public void setMsgErro(String msgErro) {
 		this.msgErro = msgErro;
+
 	}
 
 }
